@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Unity.Cinemachine;
 using Sirenix.OdinInspector;
@@ -52,12 +53,28 @@ public class CameraController : MyBox.Singleton<CameraController>
         followTarget = virtualCamera.Follow;
     }
 
+    private void Start()
+    {
+        GameManager.Instance.OnRunStart += OnRunTimerStart;
+        GameManager.Instance.OnRunEnd += OnRunTimerEnd;
+    }
+    
+    private void OnRunTimerStart()
+    {
+        SetControl(true);
+    }
+    
+    private void OnRunTimerEnd()
+    {
+        SetControl(false);
+    }
+
     private void Update()
     {
         if (!isControlling) return;
-        HandlePanning();
-        HandleZoom();
-        HandleRotation();
+        // HandlePanning();
+        // HandleZoom();
+        // HandleRotation();
     }
 
     public void SetControl(bool enable)
@@ -66,7 +83,7 @@ public class CameraController : MyBox.Singleton<CameraController>
 
         if (enable)
         {
-            lastMousePosition = Input.mousePosition;
+            lastMousePosition = Mouse.current.position.ReadValue();
         }
     }
 
@@ -77,7 +94,7 @@ public class CameraController : MyBox.Singleton<CameraController>
         // Middle mouse pan
         if (Input.GetMouseButtonDown(2))
         {
-            lastMousePosition = Input.mousePosition;
+            lastMousePosition = Mouse.current.position.ReadValue();
         }
 
         if (Input.GetMouseButton(2))
@@ -92,7 +109,7 @@ public class CameraController : MyBox.Singleton<CameraController>
 
             newPosition = ApplyBoundaryConstraint(newPosition);
             followTarget.position = newPosition;
-            lastMousePosition = Input.mousePosition;
+            lastMousePosition = Mouse.current.position.ReadValue();
         }
 
         // WASD pan (physical key position, cross-layout)

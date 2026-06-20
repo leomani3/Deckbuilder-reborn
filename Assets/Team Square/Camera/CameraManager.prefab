@@ -10,14 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7695534261230894675}
   - component: {fileID: 8529779136037131250}
-  - component: {fileID: 8283230561331374884}
   - component: {fileID: 2909601869557918209}
   - component: {fileID: 9026062327420378778}
   - component: {fileID: 9116475251767432605}
   - component: {fileID: 6428098469368468697}
-  - component: {fileID: 5779485784416475175}
+  - component: {fileID: 4709618183417916281}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Camera 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244475919903486175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39044836, y: 0.346829, z: -0.16172901, w: 0.83731925}
-  m_LocalPosition: {x: -4.8633585, y: 7.396675, z: -4.8633575}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 11, z: -6.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5748306863865007338}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
 --- !u!20 &8529779136037131250
 Camera:
   m_ObjectHideFlags: 0
@@ -47,7 +46,7 @@ Camera:
   m_GameObject: {fileID: 1244475919903486175}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -71,7 +70,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34
+  field of view: 56.5
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -89,14 +88,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8283230561331374884
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244475919903486175}
-  m_Enabled: 1
 --- !u!114 &2909601869557918209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,23 +214,14 @@ MonoBehaviour:
   dilateQuality: 0
   blurIterations: 1
   blurType: 1
---- !u!114 &5779485784416475175
-MonoBehaviour:
+--- !u!81 &4709618183417916281
+AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244475919903486175}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
 --- !u!1 &6253803983944833123
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 8529779136037131250}
+  m_vCam: {fileID: 8499985053862778347}
 --- !u!1 &8501095908338403052
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,8 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9201192257982053241}
   - component: {fileID: 8499985053862778347}
-  - component: {fileID: 2134050699880411974}
-  - component: {fileID: 8917754631959297899}
+  - component: {fileID: 7426216418477386545}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -314,13 +296,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8501095908338403052}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39044836, y: 0.346829, z: -0.16172901, w: 0.83731925}
-  m_LocalPosition: {x: -4.8633585, y: 7.396675, z: -4.8633575}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 11, z: -6.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5748306863865007338}
-  m_LocalEulerAnglesHint: {x: 50, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &8499985053862778347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +327,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 34
+    FieldOfView: 56.5
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -364,7 +346,7 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &2134050699880411974
+--- !u!114 &7426216418477386545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,90 +355,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8501095908338403052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  CameraDistance: 10.7
-  DeadZoneDepth: 0
-  Composition:
-    ScreenPosition: {x: 0, y: 0}
-    DeadZone:
-      Enabled: 0
-      Size: {x: 0.2, y: 0.2}
-    HardLimits:
-      Enabled: 0
-      Size: {x: 0.8, y: 0.8}
-      Offset: {x: 0, y: 0}
-  CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.1, y: 0.1, z: 0.1}
-  Lookahead:
-    Enabled: 0
-    Time: 0
-    Smoothing: 0
-    IgnoreY: 0
---- !u!114 &8917754631959297899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501095908338403052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b2923897989ab4aaa67ef710a61eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_uiBackgroundImage: {fileID: 0}
-  panSpeed: 5
-  zoomSpeed: 2
-  zoomSmoothness: 6
-  minCameraDistance: 15
-  maxCameraDistance: 40
-  m_defaultZooom: 25
-  rotationSpeed: 40
-  boundaryRadius: 60
-  m_resetAnimDuration: 2
-  m_resetAnimZoom: 100
-  m_resetAnimCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.21278735
-      outSlope: 0.21278735
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.28539076
-    - serializedVersion: 3
-      time: 0.098095976
-      value: 0.044914175
-      inSlope: 0.83149904
-      outSlope: 0.83149904
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.26142305
-      outWeight: 0.06954204
-    - serializedVersion: 3
-      time: 0.59519446
-      value: 0.819812
-      inSlope: 1.1401176
-      outSlope: 1.1401176
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.10694432
-      outWeight: 0.2559798
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.114743225
-      outSlope: 0.114743225
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.15791315
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
