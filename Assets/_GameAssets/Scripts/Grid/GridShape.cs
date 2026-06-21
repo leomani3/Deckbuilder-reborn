@@ -13,10 +13,23 @@ namespace Deckbuilder.Grid
 
     public static class GridShapeUtility
     {
-        public static IEnumerable<Vector2Int> GetCoordinates(Vector2Int _origin, GridShape _shape, int _size)
+        // Size is a 1-indexed "ring count" from the caller's perspective: Size 1 means just the origin
+        // cell (equivalent to Single) for every shape, Size 2 adds the immediate ring, and so on.
+        // Internally each shape is built from a 0-indexed radius, so Size is shifted down by one here.
+        // MinSize is a literal minimum Manhattan distance threshold (0 = no restriction, 1 = excludes
+        // the origin cell, etc.) and is intentionally NOT shifted, since it represents "how close is
+        // too close" rather than a ring count.
+        public static IEnumerable<Vector2Int> GetCoordinates(Vector2Int _origin, GridShape _shape, int _size, int _minSize = 0)
         {
-            foreach (Vector2Int _offset in GetOffsets(_shape, _size))
+            int _radius = Mathf.Max(_size - 1, 0);
+
+            foreach (Vector2Int _offset in GetOffsets(_shape, _radius))
+            {
+                if (_minSize > 0 && ManhattanDistance(Vector2Int.zero, _offset) < _minSize)
+                    continue;
+
                 yield return _origin + _offset;
+            }
         }
 
         public static IEnumerable<Vector2Int> GetOffsets(GridShape _shape, int _size)

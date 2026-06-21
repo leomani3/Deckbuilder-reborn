@@ -62,9 +62,9 @@ namespace Deckbuilder.Grid
             return GetCell(new Vector2Int(Mathf.RoundToInt(_x), Mathf.RoundToInt(_y)));
         }
 
-        public IEnumerable<GridCell> GetCellsInZone(Vector2Int _origin, GridShape _shape, int _size)
+        public IEnumerable<GridCell> GetCellsInZone(Vector2Int _origin, GridShape _shape, int _size, int _minSize = 0)
         {
-            foreach (Vector2Int _coordinate in GridShapeUtility.GetCoordinates(_origin, _shape, _size))
+            foreach (Vector2Int _coordinate in GridShapeUtility.GetCoordinates(_origin, _shape, _size, _minSize))
             {
                 if (m_cellsByCoordinate.TryGetValue(_coordinate, out GridCell _cell))
                     yield return _cell;
@@ -86,9 +86,9 @@ namespace Deckbuilder.Grid
             return GridPathfinder.GetReachableCells(_start, _maxSteps, GetCell, _ignoreOccupants);
         }
 
-        public bool HasLineOfSight(GridCell _from, GridCell _to, out GridCell _blockingCell)
+        public bool HasLineOfSight(GridCell _from, GridCell _to, out GridCell _blockingCell, Entity _ignoreOccupant = null)
         {
-            return GridLineOfSight.HasLineOfSight(_from, _to, GetCell, out _blockingCell);
+            return GridLineOfSight.HasLineOfSight(_from, _to, GetCell, out _blockingCell, _ignoreOccupant);
         }
 
         public bool MoveEntity(Entity _entity, GridCell _targetCell)

@@ -6,7 +6,7 @@ namespace Deckbuilder.Grid
 {
     public static class GridLineOfSight
     {
-        public static bool HasLineOfSight(GridCell _from, GridCell _to, Func<Vector2Int, GridCell> _cellResolver, out GridCell _blockingCell)
+        public static bool HasLineOfSight(GridCell _from, GridCell _to, Func<Vector2Int, GridCell> _cellResolver, out GridCell _blockingCell, Entity _ignoreOccupant = null)
         {
             _blockingCell = null;
 
@@ -19,7 +19,11 @@ namespace Deckbuilder.Grid
                     continue;
 
                 GridCell _cell = _cellResolver(_coordinate);
-                if (_cell != null && (_cell.IsObstacle || _cell.IsOccupied))
+                if (_cell == null)
+                    continue;
+
+                bool _blockedByOccupant = _cell.IsOccupied && _cell.Occupant != _ignoreOccupant;
+                if (_cell.IsObstacle || _blockedByOccupant)
                 {
                     _blockingCell = _cell;
                     return false;

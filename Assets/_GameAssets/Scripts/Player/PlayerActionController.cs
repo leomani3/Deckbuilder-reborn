@@ -136,10 +136,10 @@ namespace Deckbuilder.Player
                 return;
             }
 
-            foreach (GridCell _cell in GetCellsInZone(_entity.EffectiveCell.Coordinate, m_testCard.TargetZone.Shape, m_testCard.TargetZone.Size))
+            foreach (GridCell _cell in GetCellsInZone(_entity.EffectiveCell.Coordinate, m_testCard.TargetZone.Shape, m_testCard.TargetZone.Size, m_testCard.TargetZone.MinSize))
             {
                 bool _hasLineOfSight = !m_testCard.RequiresLineOfSight
-                    || GridManager.Instance.HasLineOfSight(_entity.EffectiveCell, _cell, out GridCell _blockingCell);
+                    || GridManager.Instance.HasLineOfSight(_entity.EffectiveCell, _cell, out GridCell _blockingCell, _entity);
 
                 Color _cellColor = _hasLineOfSight ? m_targetZoneColor : m_targetZoneBlockedColor;
                 CellHighlightManager.Instance.Highlight(_cell, HighlightLayer.TargetZone, _cellColor);
@@ -148,7 +148,7 @@ namespace Deckbuilder.Player
             if (m_hoveredCell == null || !CardExecutor.CanTarget(m_testCard, _entity, m_hoveredCell))
                 return;
 
-            foreach (GridCell _cell in GetCellsInZone(m_hoveredCell.Coordinate, m_testCard.EffectZone.Shape, m_testCard.EffectZone.Size))
+            foreach (GridCell _cell in GetCellsInZone(m_hoveredCell.Coordinate, m_testCard.EffectZone.Shape, m_testCard.EffectZone.Size, m_testCard.EffectZone.MinSize))
                 CellHighlightManager.Instance.Highlight(_cell, HighlightLayer.EffectZone, m_effectZoneColor);
 
             if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
@@ -196,10 +196,10 @@ namespace Deckbuilder.Player
             CellHighlightManager.Instance.ClearLayer(HighlightLayer.EffectZone);
         }
 
-        private static IEnumerable<GridCell> GetCellsInZone(Vector2Int _origin, GridShape _shape, int _size)
+        private static IEnumerable<GridCell> GetCellsInZone(Vector2Int _origin, GridShape _shape, int _size, int _minSize = 0)
         {
             return GridManager.Instance != null
-                ? GridManager.Instance.GetCellsInZone(_origin, _shape, _size)
+                ? GridManager.Instance.GetCellsInZone(_origin, _shape, _size, _minSize)
                 : System.Array.Empty<GridCell>();
         }
     }

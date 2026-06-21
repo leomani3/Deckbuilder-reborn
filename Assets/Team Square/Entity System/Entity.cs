@@ -130,6 +130,15 @@ public class Entity : MonoBehaviour, IPoolable
         CurrentCell = _cell;
     }
 
+    public void FaceTowards(Vector3 _position)
+    {
+        Vector3 _direction = _position - transform.position;
+        _direction.y = 0f;
+
+        if (_direction.sqrMagnitude > 0.0001f)
+            transform.rotation = Quaternion.LookRotation(_direction);
+    }
+
     public bool MoveTo(GridCell _destination, bool _ignoreOccupants = false, bool _randomizePath = false)
     {
         if (IsMoving || _destination == null || GridManager.Instance == null || CurrentCell == null)

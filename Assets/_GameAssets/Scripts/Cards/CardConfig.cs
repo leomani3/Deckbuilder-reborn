@@ -20,6 +20,9 @@ namespace Deckbuilder.Cards
         [Title("Effect Zone")]
         [SerializeField] private ZoneDefinition m_effectZone;
 
+        [Title("Animation")]
+        [SerializeField] private AnimationClip m_castAnimation;
+
         [Title("Actions")]
         [SerializeReference, ListDrawerSettings(ListElementLabelName = "ActionName")]
         private List<CardAction> m_actions = new();
@@ -32,6 +35,8 @@ namespace Deckbuilder.Cards
         public bool RequiresLineOfSight => m_requiresLineOfSight;
 
         public ZoneDefinition EffectZone => m_effectZone;
+
+        public AnimationClip CastAnimation => m_castAnimation;
 
         public IReadOnlyList<CardAction> Actions => m_actions;
     }

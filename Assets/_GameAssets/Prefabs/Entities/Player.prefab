@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 1263906146987368594}
   - component: {fileID: 4093189936423608283}
   - component: {fileID: 4408327212972370169}
+  - component: {fileID: 6070309885393661408}
+  - component: {fileID: 4126890230030337448}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -61,7 +63,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5378343266826727225}
   m_Father: {fileID: 3166842061520916200}
@@ -146,6 +148,40 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &6070309885393661408
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710692410450558917}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f17105f7ca979ca429d1cabfffe4ee9e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4126890230030337448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710692410450558917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41d0e8534e401a46b2fd72268d61fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntityAE
 --- !u!1 &4110038496615255937
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +309,7 @@ GameObject:
   - component: {fileID: 5053010806634216717}
   - component: {fileID: 695835984063259955}
   - component: {fileID: 2749748123305342507}
+  - component: {fileID: 5797335834587973518}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -364,7 +401,7 @@ MonoBehaviour:
   m_moveRangeColor: {r: 0, g: 1, b: 0, a: 0.4}
   m_movePathColor: {r: 1, g: 0.5, b: 0, a: 0.6}
   m_targetZoneColor: {r: 0, g: 0.5, b: 1, a: 0.5}
-  m_targetZoneBlockedColor: {r: 0, g: 0.5, b: 1, a: 0.16470589}
+  m_targetZoneBlockedColor: {r: 0.0019010045, g: 0.168875, b: 0.335849, a: 0.16470589}
   m_effectZoneColor: {r: 1, g: 0.5, b: 0, a: 0.6}
 --- !u!114 &695835984063259955
 MonoBehaviour:
@@ -390,3 +427,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023dea0cc5f17c948837f1e35bb9683d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stats.EntityStatModule
+--- !u!114 &5797335834587973518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6320843068774437304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4836367fb8ea16e4d90a76324d1bf934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntityAnimationModule
+  m_animator: {fileID: 6070309885393661408}

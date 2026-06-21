@@ -20,10 +20,22 @@ namespace Deckbuilder.Actions
 
         public IEnumerator Execute()
         {
+            m_caster.FaceTowards(m_targetCell.transform.position);
+
+            if (m_card.CastAnimation != null && m_caster.TryGetModule(out EntityAnimationModule _animationModule))
+            {
+                yield return _animationModule.PlayCast(m_card.CastAnimation, ApplyCard);
+            }
+            else
+            {
+                ApplyCard();
+            }
+        }
+
+        private void ApplyCard()
+        {
             if (!CardExecutor.Execute(m_card, m_caster, m_targetCell))
                 Debug.LogWarning($"[PlayCardAction] Failed to play '{m_card.Title}' on {m_targetCell.name}.");
-
-            yield break;
         }
     }
 }

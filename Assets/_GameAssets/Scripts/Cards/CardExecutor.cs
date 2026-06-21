@@ -13,7 +13,7 @@ namespace Deckbuilder.Cards
                 return false;
 
             ZoneDefinition _targetZone = _card.TargetZone;
-            foreach (GridCell _cell in GridManager.Instance.GetCellsInZone(_caster.EffectiveCell.Coordinate, _targetZone.Shape, _targetZone.Size))
+            foreach (GridCell _cell in GridManager.Instance.GetCellsInZone(_caster.EffectiveCell.Coordinate, _targetZone.Shape, _targetZone.Size, _targetZone.MinSize))
             {
                 if (_cell == _targetCell)
                     return true;
@@ -27,7 +27,7 @@ namespace Deckbuilder.Cards
             if (!IsWithinTargetZone(_card, _caster, _targetCell))
                 return false;
 
-            if (_card.RequiresLineOfSight && !GridManager.Instance.HasLineOfSight(_caster.EffectiveCell, _targetCell, out GridCell _blockingCell))
+            if (_card.RequiresLineOfSight && !GridManager.Instance.HasLineOfSight(_caster.EffectiveCell, _targetCell, out GridCell _blockingCell, _caster))
                 return false;
 
             return true;
@@ -39,7 +39,7 @@ namespace Deckbuilder.Cards
                 return false;
 
             List<Entity> _affectedEntities = new List<Entity>();
-            foreach (GridCell _cell in GridManager.Instance.GetCellsInZone(_targetCell.Coordinate, _card.EffectZone.Shape, _card.EffectZone.Size))
+            foreach (GridCell _cell in GridManager.Instance.GetCellsInZone(_targetCell.Coordinate, _card.EffectZone.Shape, _card.EffectZone.Size, _card.EffectZone.MinSize))
             {
                 if (_cell.Occupant != null)
                     _affectedEntities.Add(_cell.Occupant);
