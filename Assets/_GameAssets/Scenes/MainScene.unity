@@ -5328,6 +5328,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 1239560826}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1250462078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1250462080}
+  - component: {fileID: 1250462079}
+  m_Layer: 0
+  m_Name: CellHighlightManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1250462079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250462078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e50a1e752aadb64faf4fa6fd4eca4da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.Highlighting.CellHighlightManager
+--- !u!4 &1250462080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250462078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 925.06055, y: 661.78, z: 9.77967}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1257523177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9039,7 +9083,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2027796468}
   - component: {fileID: 2027796467}
-  - component: {fileID: 2027796469}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -9080,42 +9123,6 @@ Transform:
   - {fileID: 1917021795}
   m_Father: {fileID: 1547763363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2027796469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027796466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2de907eec8e8243bf602864391a543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.Debugging.GridDebugger
-  m_origin: {fileID: 0}
-  m_shape: 2
-  m_size: 2
-  m_showZone: 1
-  m_zoneColor: {r: 1, g: 0.5, b: 0, a: 0.6}
-  m_originColor: {r: 1, g: 0, b: 0, a: 1}
-  m_showNeighborLinks: 0
-  m_neighborReference: {fileID: 0}
-  m_neighborLinkColor: {r: 0, g: 1, b: 1, a: 1}
-  m_showPath: 0
-  m_pathStart: {fileID: 0}
-  m_pathEnd: {fileID: 0}
-  m_pathIgnoreOccupants: 0
-  m_pathColor: {r: 0, g: 1, b: 0, a: 1}
-  m_noPathColor: {r: 1, g: 0, b: 0, a: 1}
-  m_showLineOfSight: 0
-  m_losFrom: {fileID: 0}
-  m_losTo: {fileID: 0}
-  m_losClearColor: {r: 0, g: 1, b: 0, a: 1}
-  m_losBlockedColor: {r: 1, g: 0, b: 0, a: 1}
-  m_losBlockingCellColor: {r: 1, g: 0, b: 0, a: 0.9}
-  m_showCoordinateLabels: 0
-  m_markerHeight: 0.05
-  m_markerRadius: 0.4
 --- !u!1001 &2033431454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9495,3 +9502,6 @@ SceneRoots:
   - {fileID: 1392128783}
   - {fileID: 809047057}
   - {fileID: 1547763363}
+  - {fileID: 1946257817}
+  - {fileID: 1250462080}
+  - {fileID: 487637167}

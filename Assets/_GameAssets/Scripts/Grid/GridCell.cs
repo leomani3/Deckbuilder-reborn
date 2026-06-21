@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Deckbuilder.Grid.Highlighting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,6 +15,18 @@ namespace Deckbuilder.Grid
         public bool IsOccupied => Occupant != null;
         public bool IsObstacle => m_isObstacle;
         public bool IsWalkable => !IsObstacle && !IsOccupied;
+
+        private CellHighlightVisual m_highlightVisual;
+        public CellHighlightVisual HighlightVisual
+        {
+            get
+            {
+                if (m_highlightVisual == null)
+                    m_highlightVisual = GetComponent<CellHighlightVisual>() ?? gameObject.AddComponent<CellHighlightVisual>();
+
+                return m_highlightVisual;
+            }
+        }
 
         private readonly Dictionary<GridDirection, GridCell> m_neighbors = new();
 

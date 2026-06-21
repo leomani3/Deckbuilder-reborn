@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd22dc45c34fdde43a8687458563919f, type: 3}
   m_Name: CardAttack
   m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Cards.CardConfig
-  id: card_attack
-  title: Attack
-  illustration: {fileID: 21300000, guid: 47217cddcf89ff74d88632fefe87d751, type: 3}
-  targetZone:
-    shape: 0
-    size: 0
-  requiresLineOfSight: 0
-  effectZone:
-    shape: 0
-    size: 0
-  actions:
-  - rid: 4862471898539491419
+  m_id: 
+  m_title: 
+  m_illustration: {fileID: 0}
+  m_targetZone:
+    m_shape: 2
+    m_size: 5
+  m_requiresLineOfSight: 1
+  m_effectZone:
+    m_shape: 1
+    m_size: 2
+  m_actions:
+  - rid: 4862471916181520472
   references:
     version: 2
     RefIds:
-    - rid: 4862471898539491419
+    - rid: 4862471916181520472
       type: {class: DealDamageCardAction, ns: Deckbuilder.Cards.Actions, asm: Assembly-CSharp}
       data:
-        damage: 0
+        m_damage: 10

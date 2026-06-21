@@ -270,7 +270,9 @@ GameObject:
   - component: {fileID: 7084411772291711107}
   - component: {fileID: 3056468803148246072}
   - component: {fileID: 6563044506811859661}
-  - component: {fileID: 2214541782619669408}
+  - component: {fileID: 5053010806634216717}
+  - component: {fileID: 695835984063259955}
+  - component: {fileID: 2749748123305342507}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -340,7 +342,7 @@ MonoBehaviour:
   m_criticalFloatingTextConfig: {fileID: 11400000, guid: cdb3af6339353804b9d16b0b6b4fe187, type: 2}
   m_healthBarTarget: {fileID: 5197288530841706124}
   m_genericGaugePrefab: {fileID: 3276611897021444203, guid: 8ba6804fea548b84ea546c434c84122b, type: 3}
---- !u!114 &2214541782619669408
+--- !u!114 &5053010806634216717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -349,15 +351,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 6320843068774437304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e6d74d054cb0094794704dbeb4d0bc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fef2a41aed5f624e9a4c88e6597b83c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.Debugging.EntityMoveDebugger
-  m_entity: {fileID: 0}
-  m_enableClickToMove: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Player.PlayerActionController
+  m_entity: {fileID: 7084411772291711107}
+  m_testCard: {fileID: 11400000, guid: 7ff05e956c4dfca429fd4323b5589952, type: 2}
+  m_moveModeKey: 41
+  m_selectCardKey: 42
   m_cellLayerMask:
     serializedVersion: 2
     m_Bits: 119
-  m_currentCellColor: {r: 0, g: 1, b: 0, a: 1}
-  m_destinationCellColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  m_markerHeight: 0.05
-  m_markerRadius: 0.4
+  m_moveRangeColor: {r: 0, g: 1, b: 0, a: 0.4}
+  m_movePathColor: {r: 1, g: 0.5, b: 0, a: 0.6}
+  m_targetZoneColor: {r: 0, g: 0.5, b: 1, a: 0.5}
+  m_targetZoneBlockedColor: {r: 0, g: 0.5, b: 1, a: 0.16470589}
+  m_effectZoneColor: {r: 1, g: 0.5, b: 0, a: 0.6}
+--- !u!114 &695835984063259955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6320843068774437304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a2ff60792e7804393accc5055cfb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Actions.EntityActionQueueModule
+--- !u!114 &2749748123305342507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6320843068774437304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023dea0cc5f17c948837f1e35bb9683d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stats.EntityStatModule

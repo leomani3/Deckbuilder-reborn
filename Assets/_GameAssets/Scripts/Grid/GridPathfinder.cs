@@ -55,6 +55,54 @@ namespace Deckbuilder.Grid
             return null;
         }
 
+        public static List<GridCell> GetReachableCells(GridCell _start, int _maxSteps, Func<Vector2Int, GridCell> _cellResolver, bool _ignoreOccupants = false)
+        {
+            List<GridCell> _result = new List<GridCell>();
+            if (_start == null || _maxSteps <= 0)
+                return _result;
+
+            Dictionary<Vector2Int, int> _visitedCost = new Dictionary<Vector2Int, int> { [_start.Coordinate] = 0 };
+            Queue<Vector2Int> _frontier = new Queue<Vector2Int>();
+            _frontier.Enqueue(_start.Coordinate);
+
+            while (_frontier.Count > 0)
+            {
+                Vector2Int _current = _frontier.Dequeue();
+                int _currentCost = _visitedCost[_current];
+
+                if (_currentCost >= _maxSteps)
+                    continue;
+
+                foreach (GridDirection _direction in GridDirectionUtility.Orthogonal)
+                {
+                    Vector2Int _neighborCoordinate = _current + GridDirectionUtility.GetOffset(_direction);
+                    GridCell _neighborCell = _cellResolver(_neighborCoordinate);
+
+                    if (_neighborCell == null || !IsWalkable(_neighborCell, _ignoreOccupants))
+                        continue;
+
+                    int _newCost = _currentCost + 1;
+                    if (_visitedCost.TryGetValue(_neighborCoordinate, out int _existingCost) && _existingCost <= _newCost)
+                        continue;
+
+                    _visitedCost[_neighborCoordinate] = _newCost;
+                    _frontier.Enqueue(_neighborCoordinate);
+                }
+            }
+
+            foreach (Vector2Int _coordinate in _visitedCost.Keys)
+            {
+                if (_coordinate == _start.Coordinate)
+                    continue;
+
+                GridCell _cell = _cellResolver(_coordinate);
+                if (_cell != null)
+                    _result.Add(_cell);
+            }
+
+            return _result;
+        }
+
         private static bool IsWalkable(GridCell _cell, bool _ignoreOccupants)
         {
             if (_cell.IsObstacle)

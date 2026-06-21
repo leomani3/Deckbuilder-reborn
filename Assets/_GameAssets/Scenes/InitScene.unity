@@ -1988,6 +1988,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8005248763961546704, guid: 71ff5d3d1dfaf4b4da659f422166dd5a, type: 3}
+      propertyPath: m_entityStatDefinitions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005248763961546704, guid: 71ff5d3d1dfaf4b4da659f422166dd5a, type: 3}
+      propertyPath: 'm_entityStatDefinitions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 683fca3730e93584ab5874f9065fa932, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

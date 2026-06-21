@@ -13,6 +13,7 @@ namespace Deckbuilder.Grid
         [FormerlySerializedAs("cells")] [SerializeField, ReadOnly] private List<GridCell> m_cells = new();
 
         public IReadOnlyList<GridCell> Cells => m_cells;
+        public float CellSize => m_cellSize;
 
         public void Init()
         {
@@ -78,6 +79,11 @@ namespace Deckbuilder.Grid
         public List<GridCell> FindPath(GridCell _start, GridCell _goal, bool _ignoreOccupants = false, bool _randomize = false)
         {
             return GridPathfinder.FindPath(_start, _goal, GetCell, _ignoreOccupants, _randomize);
+        }
+
+        public List<GridCell> GetReachableCells(GridCell _start, int _maxSteps, bool _ignoreOccupants = false)
+        {
+            return GridPathfinder.GetReachableCells(_start, _maxSteps, GetCell, _ignoreOccupants);
         }
 
         public bool HasLineOfSight(GridCell _from, GridCell _to, out GridCell _blockingCell)
