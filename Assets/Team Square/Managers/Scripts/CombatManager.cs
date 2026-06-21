@@ -8,12 +8,21 @@ public class CombatManager : MyBox.Singleton<CombatManager>
 {
     [TitleGroup("Player")]
     [SerializeField] private Entity m_playerPrefab;
+    [SerializeField] private Vector2Int m_playerSpawnCoordinate = new(0, 0);
+
+    [TitleGroup("Enemy")]
+    [SerializeField] private Entity m_enemyPrefab;
+    [SerializeField] private Vector2Int m_enemySpawnCoordinate = new(3, 0);
+
+    public Entity Player { get; private set; }
+    public Entity Enemy { get; private set; }
 
     private void Awake()
     {
         GridManager.Instance.Init();
-        
-        SpawnEntity(m_playerPrefab, GridManager.Instance.GetCell(0, 0));
+
+        Player = SpawnEntity(m_playerPrefab, GridManager.Instance.GetCell(m_playerSpawnCoordinate.x, m_playerSpawnCoordinate.y));
+        Enemy = SpawnEntity(m_enemyPrefab, GridManager.Instance.GetCell(m_enemySpawnCoordinate.x, m_enemySpawnCoordinate.y));
     }
 
     public Entity SpawnEntity(Entity _entityPrefab, GridCell _cell)

@@ -25,6 +25,12 @@ public class Entity : MonoBehaviour, IPoolable
     public GridCell DestinationCell { get; private set; }
     public bool IsMoving { get; private set; }
 
+    /// <summary>
+    /// The cell this entity should be treated as standing on for targeting/effect purposes:
+    /// its destination while mid-move, otherwise its actual current cell.
+    /// </summary>
+    public GridCell EffectiveCell => IsMoving && DestinationCell != null ? DestinationCell : CurrentCell;
+
     private Coroutine m_moveRoutine;
     private bool m_cancelMoveRequested;
 

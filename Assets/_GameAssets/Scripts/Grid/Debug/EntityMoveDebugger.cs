@@ -1,3 +1,4 @@
+using Deckbuilder.Debugging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,18 +19,31 @@ namespace Deckbuilder.Grid.Debugging
         [SerializeField] private float m_markerHeight = 0.05f;
         [SerializeField] private float m_markerRadius = 0.4f;
 
+        private Entity ResolveEntity()
+        {
+            if (m_entity != null)
+                return m_entity;
+
+            return CombatManager.Instance != null ? CombatManager.Instance.Player : null;
+        }
+
         [ContextMenu("Cancel Move")]
         private void CancelMove()
         {
-            if (m_entity == null)
+            Entity _entity = ResolveEntity();
+            if (_entity == null)
                 return;
 
-            m_entity.CancelMove();
+            _entity.CancelMove();
         }
 
         private void Update()
         {
-            if (!m_enableClickToMove || m_entity == null)
+            if (!m_enableClickToMove || DebugClickRouter.Mode != DebugClickMode.Move)
+                return;
+
+            Entity _entity = ResolveEntity();
+            if (_entity == null)
                 return;
 
             if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame)
@@ -47,25 +61,26 @@ namespace Deckbuilder.Grid.Debugging
             {
                 GridCell _cell = _hit.collider.GetComponentInParent<GridCell>();
                 if (_cell != null)
-                    m_entity.MoveTo(_cell);
+                    _entity.MoveTo(_cell);
             }
         }
 
         private void OnDrawGizmos()
         {
-            if (m_entity == null)
+            Entity _entity = ResolveEntity();
+            if (_entity == null)
                 return;
 
-            if (m_entity.CurrentCell != null)
+            if (_entity.CurrentCell != null)
             {
                 Gizmos.color = m_currentCellColor;
-                Gizmos.DrawSphere(m_entity.CurrentCell.transform.position + Vector3.up * m_markerHeight, m_markerRadius);
+                Gizmos.DrawSphere(_entity.CurrentCell.transform.position + Vector3.up * m_markerHeight, m_markerRadius);
             }
 
-            if (m_entity.DestinationCell != null)
+            if (_entity.DestinationCell != null)
             {
                 Gizmos.color = m_destinationCellColor;
-                Gizmos.DrawSphere(m_entity.DestinationCell.transform.position + Vector3.up * m_markerHeight, m_markerRadius);
+                Gizmos.DrawSphere(_entity.DestinationCell.transform.position + Vector3.up * m_markerHeight, m_markerRadius);
             }
         }
     }

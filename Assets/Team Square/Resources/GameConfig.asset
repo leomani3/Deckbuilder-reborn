@@ -27,5 +27,5 @@ MonoBehaviour:
     resetCurrenciesNeeded: []
     delayBeforeCanValidateOnClick: 0.2
   entitySettings:
-    moveSpeed: 10
+    moveSpeed: 6
     rotationSpeed: 35

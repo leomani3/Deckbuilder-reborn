@@ -7225,6 +7225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   m_playerPrefab: {fileID: 7084411772291711107, guid: 44d918900ab201d429fba1a314c497a3, type: 3}
+  m_playerSpawnCoordinate: {x: 0, y: 0}
+  m_enemyPrefab: {fileID: 7084411772291711107, guid: cec6cac30e47d774ca1cefea09071577, type: 3}
+  m_enemySpawnCoordinate: {x: 3, y: 0}
 --- !u!4 &1547763363
 Transform:
   m_ObjectHideFlags: 0

@@ -108,7 +108,7 @@ public class EntityHealthModule : EntityModule
     }
 
     #region Heal
-    protected virtual void Heal(double amount, bool suppressFeedback = false)
+    public virtual void Heal(double amount, bool suppressFeedback = false)
     {
         if (m_isDead || amount <= 0f) return;
         
