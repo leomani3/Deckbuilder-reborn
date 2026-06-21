@@ -6,122 +6,122 @@ namespace Deckbuilder.Grid
 {
     public static class GridPathfinder
     {
-        public static List<GridCell> FindPath(GridCell start, GridCell goal, Func<Vector2Int, GridCell> cellResolver, bool ignoreOccupants = false, bool randomize = false)
+        public static List<GridCell> FindPath(GridCell _start, GridCell _goal, Func<Vector2Int, GridCell> _cellResolver, bool _ignoreOccupants = false, bool _randomize = false)
         {
-            if (start == null || goal == null)
+            if (_start == null || _goal == null)
                 return null;
 
-            var startCoordinate = start.Coordinate;
-            var goalCoordinate = goal.Coordinate;
+            Vector2Int _startCoordinate = _start.Coordinate;
+            Vector2Int _goalCoordinate = _goal.Coordinate;
 
-            var openSet = new List<Vector2Int> { startCoordinate };
-            var cameFrom = new Dictionary<Vector2Int, Vector2Int>();
-            var gScore = new Dictionary<Vector2Int, int> { [startCoordinate] = 0 };
-            var fScore = new Dictionary<Vector2Int, int> { [startCoordinate] = ManhattanDistance(startCoordinate, goalCoordinate) };
+            List<Vector2Int> _openSet = new List<Vector2Int> { _startCoordinate };
+            Dictionary<Vector2Int, Vector2Int> _cameFrom = new Dictionary<Vector2Int, Vector2Int>();
+            Dictionary<Vector2Int, int> _gScore = new Dictionary<Vector2Int, int> { [_startCoordinate] = 0 };
+            Dictionary<Vector2Int, int> _fScore = new Dictionary<Vector2Int, int> { [_startCoordinate] = ManhattanDistance(_startCoordinate, _goalCoordinate) };
 
-            while (openSet.Count > 0)
+            while (_openSet.Count > 0)
             {
-                var current = GetLowestFScore(openSet, fScore, randomize);
+                Vector2Int _current = GetLowestFScore(_openSet, _fScore, _randomize);
 
-                if (current == goalCoordinate)
-                    return ReconstructPath(cameFrom, current, cellResolver);
+                if (_current == _goalCoordinate)
+                    return ReconstructPath(_cameFrom, _current, _cellResolver);
 
-                openSet.Remove(current);
+                _openSet.Remove(_current);
 
-                foreach (var direction in GetExplorationOrder(randomize))
+                foreach (GridDirection _direction in GetExplorationOrder(_randomize))
                 {
-                    var neighborCoordinate = current + GridDirectionUtility.GetOffset(direction);
-                    var neighborCell = cellResolver(neighborCoordinate);
+                    Vector2Int _neighborCoordinate = _current + GridDirectionUtility.GetOffset(_direction);
+                    GridCell _neighborCell = _cellResolver(_neighborCoordinate);
 
-                    if (neighborCell == null)
+                    if (_neighborCell == null)
                         continue;
 
-                    if (!IsWalkable(neighborCell, ignoreOccupants))
+                    if (!IsWalkable(_neighborCell, _ignoreOccupants))
                         continue;
 
-                    var tentativeGScore = gScore[current] + 1;
-                    if (gScore.TryGetValue(neighborCoordinate, out var existingGScore) && tentativeGScore >= existingGScore)
+                    int _tentativeGScore = _gScore[_current] + 1;
+                    if (_gScore.TryGetValue(_neighborCoordinate, out int _existingGScore) && _tentativeGScore >= _existingGScore)
                         continue;
 
-                    cameFrom[neighborCoordinate] = current;
-                    gScore[neighborCoordinate] = tentativeGScore;
-                    fScore[neighborCoordinate] = tentativeGScore + ManhattanDistance(neighborCoordinate, goalCoordinate);
+                    _cameFrom[_neighborCoordinate] = _current;
+                    _gScore[_neighborCoordinate] = _tentativeGScore;
+                    _fScore[_neighborCoordinate] = _tentativeGScore + ManhattanDistance(_neighborCoordinate, _goalCoordinate);
 
-                    if (!openSet.Contains(neighborCoordinate))
-                        openSet.Add(neighborCoordinate);
+                    if (!_openSet.Contains(_neighborCoordinate))
+                        _openSet.Add(_neighborCoordinate);
                 }
             }
 
             return null;
         }
 
-        private static bool IsWalkable(GridCell cell, bool ignoreOccupants)
+        private static bool IsWalkable(GridCell _cell, bool _ignoreOccupants)
         {
-            if (cell.IsObstacle)
+            if (_cell.IsObstacle)
                 return false;
 
-            return ignoreOccupants || !cell.IsOccupied;
+            return _ignoreOccupants || !_cell.IsOccupied;
         }
 
-        private static GridDirection[] GetExplorationOrder(bool randomize)
+        private static GridDirection[] GetExplorationOrder(bool _randomize)
         {
-            if (!randomize)
+            if (!_randomize)
                 return GridDirectionUtility.Orthogonal;
 
-            var shuffled = (GridDirection[])GridDirectionUtility.Orthogonal.Clone();
-            for (int i = shuffled.Length - 1; i > 0; i--)
+            GridDirection[] _shuffled = (GridDirection[])GridDirectionUtility.Orthogonal.Clone();
+            for (int _i = _shuffled.Length - 1; _i > 0; _i--)
             {
-                var swapIndex = UnityEngine.Random.Range(0, i + 1);
-                (shuffled[i], shuffled[swapIndex]) = (shuffled[swapIndex], shuffled[i]);
+                int _swapIndex = UnityEngine.Random.Range(0, _i + 1);
+                (_shuffled[_i], _shuffled[_swapIndex]) = (_shuffled[_swapIndex], _shuffled[_i]);
             }
 
-            return shuffled;
+            return _shuffled;
         }
 
-        private static Vector2Int GetLowestFScore(List<Vector2Int> openSet, Dictionary<Vector2Int, int> fScore, bool randomize)
+        private static Vector2Int GetLowestFScore(List<Vector2Int> _openSet, Dictionary<Vector2Int, int> _fScore, bool _randomize)
         {
-            var lowestScore = fScore[openSet[0]];
-            for (int i = 1; i < openSet.Count; i++)
+            int _lowestScore = _fScore[_openSet[0]];
+            for (int _i = 1; _i < _openSet.Count; _i++)
             {
-                if (fScore.TryGetValue(openSet[i], out var score) && score < lowestScore)
-                    lowestScore = score;
+                if (_fScore.TryGetValue(_openSet[_i], out int _score) && _score < _lowestScore)
+                    _lowestScore = _score;
             }
 
-            if (!randomize)
+            if (!_randomize)
             {
-                foreach (var coordinate in openSet)
+                foreach (Vector2Int _coordinate in _openSet)
                 {
-                    if (fScore.TryGetValue(coordinate, out var score) && score == lowestScore)
-                        return coordinate;
+                    if (_fScore.TryGetValue(_coordinate, out int _score) && _score == _lowestScore)
+                        return _coordinate;
                 }
             }
 
-            var candidates = new List<Vector2Int>();
-            foreach (var coordinate in openSet)
+            List<Vector2Int> _candidates = new List<Vector2Int>();
+            foreach (Vector2Int _coordinate in _openSet)
             {
-                if (fScore.TryGetValue(coordinate, out var score) && score == lowestScore)
-                    candidates.Add(coordinate);
+                if (_fScore.TryGetValue(_coordinate, out int _score) && _score == _lowestScore)
+                    _candidates.Add(_coordinate);
             }
 
-            return candidates[UnityEngine.Random.Range(0, candidates.Count)];
+            return _candidates[UnityEngine.Random.Range(0, _candidates.Count)];
         }
 
-        private static List<GridCell> ReconstructPath(Dictionary<Vector2Int, Vector2Int> cameFrom, Vector2Int current, Func<Vector2Int, GridCell> cellResolver)
+        private static List<GridCell> ReconstructPath(Dictionary<Vector2Int, Vector2Int> _cameFrom, Vector2Int _current, Func<Vector2Int, GridCell> _cellResolver)
         {
-            var path = new List<GridCell> { cellResolver(current) };
-            while (cameFrom.TryGetValue(current, out var previous))
+            List<GridCell> _path = new List<GridCell> { _cellResolver(_current) };
+            while (_cameFrom.TryGetValue(_current, out Vector2Int _previous))
             {
-                current = previous;
-                path.Add(cellResolver(current));
+                _current = _previous;
+                _path.Add(_cellResolver(_current));
             }
 
-            path.Reverse();
-            return path;
+            _path.Reverse();
+            return _path;
         }
 
-        private static int ManhattanDistance(Vector2Int a, Vector2Int b)
+        private static int ManhattanDistance(Vector2Int _a, Vector2Int _b)
         {
-            return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+            return Mathf.Abs(_a.x - _b.x) + Mathf.Abs(_a.y - _b.y);
         }
     }
 }

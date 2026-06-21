@@ -17,7 +17,7 @@ namespace Deckbuilder.Grid
 
     public static class GridDirectionUtility
     {
-        private static readonly Dictionary<GridDirection, Vector2Int> Offsets = new()
+        private static readonly Dictionary<GridDirection, Vector2Int> m_offsets = new()
         {
             { GridDirection.North, new Vector2Int(0, 1) },
             { GridDirection.South, new Vector2Int(0, -1) },
@@ -45,6 +45,9 @@ namespace Deckbuilder.Grid
             GridDirection.NorthEast, GridDirection.NorthWest, GridDirection.SouthEast, GridDirection.SouthWest
         };
 
-        public static Vector2Int GetOffset(GridDirection direction) => Offsets[direction];
+        public static Vector2Int GetOffset(GridDirection _direction)
+        {
+            return m_offsets[_direction];
+        }
     }
 }

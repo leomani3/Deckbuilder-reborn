@@ -27,6 +27,7 @@ public class GameConfig : ScriptableObject
     public CheatSettings cheatSettings = new CheatSettings();
     public GameSettings gameSettings = new GameSettings();
     public UISettings uiSettings = new UISettings();
+    public EntitySettings entitySettings = new EntitySettings();
 
     //-------------------------------------
 
@@ -45,6 +46,13 @@ public class GameConfig : ScriptableObject
     public class DebuggingSettings
     {
         public bool developmentBuild;
+    }
+
+    [System.Serializable]
+    public class EntitySettings
+    {
+        public float moveSpeed = 5f;
+        public float rotationSpeed = 10f;
     }
 
     public class UISettings

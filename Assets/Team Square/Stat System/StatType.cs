@@ -2,10 +2,7 @@ namespace Stats
 {
     public enum StatType
     {
-        MaxHealth,
-        AttackDamage,
-        AttackSpeed,
-        MoveSpeed,
-        Armor
+        MaxHealth = 0,
+        AttackDamage = 1,
     }
 }

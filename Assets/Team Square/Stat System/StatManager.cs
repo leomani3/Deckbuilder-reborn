@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using MyBox;
 using Sirenix.OdinInspector;
@@ -9,20 +8,22 @@ namespace Stats
 {
     public class StatManager : Singleton<StatManager>
     {
-        [SerializeField, AssetList(Path = "Team Square/Stat System", AutoPopulate = true)] private List<EntityStatDefinition> m_entityStatDefinitions;
+        [SerializeField, AssetList(Path = "_GameAssets", AutoPopulate = true)] private List<EntityStatDefinition> m_entityStatDefinitions;
         [SerializeField, ReadOnly] private SerializableDictionary<EntityType, Dictionary<StatType, Stat>> m_definitionStats;
         [SerializeField, ReadOnly] private SerializableDictionary<GameObject, Dictionary<StatType, Stat>> m_instanceStats;
-
+        
         private SerializableDictionary<GameObject, EntityType> m_instanceEntityTypes;
 
         protected void Awake()
         {
-            m_definitionStats     = new SerializableDictionary<EntityType, Dictionary<StatType, Stat>>();
-            m_instanceStats       = new SerializableDictionary<GameObject, Dictionary<StatType, Stat>>();
+            m_definitionStats = new SerializableDictionary<EntityType, Dictionary<StatType, Stat>>();
+            m_instanceStats = new SerializableDictionary<GameObject, Dictionary<StatType, Stat>>();
+
             m_instanceEntityTypes = new SerializableDictionary<GameObject, EntityType>();
 
             foreach (var definition in m_entityStatDefinitions)
             {
+                //Debug.Log(definition.entityType, definition);
                 if (definition == null) continue;
                 m_definitionStats[definition.entityType] = BuildStatDictionary(definition);
             }
@@ -31,34 +32,78 @@ namespace Stats
         private Dictionary<StatType, Stat> BuildStatDictionary(EntityStatDefinition definition)
         {
             var stats = new Dictionary<StatType, Stat>();
-            foreach (StatType statType in Enum.GetValues(typeof(StatType)))
-            {
-                var baseValue = definition.baseValues.TryGetValue(statType, out var v) ? v : 0f;
+            foreach (var (statType, baseValue) in definition.baseValues)
                 stats[statType] = new Stat(baseValue);
-            }
             return stats;
+        }
+
+        private Stat GetOrCreateDefinitionStat(EntityType entityType, StatType statType, double baseValue = 0)
+        {
+            // this.Log($"Getting definition stat for entity type '{entityType}' and stat type '{statType}'");
+            if (!m_definitionStats.TryGetValue(entityType, out var statDict))
+            {
+                // this.Log($"Creating new stat dictionary for entity type '{entityType}'");
+                statDict = new Dictionary<StatType, Stat>();
+                m_definitionStats[entityType] = statDict;
+            }
+
+            if (!statDict.TryGetValue(statType, out var stat))
+            {
+                // this.Log($"Creating new stat for entity type '{entityType}' and stat type '{statType}'");
+                stat = new Stat(0f);
+                statDict[statType] = stat;
+            }
+
+            return stat;
+        }
+
+        private Stat GetOrCreateInstanceStat(GameObject owner, StatType statType)
+        {
+            if (!m_instanceStats.TryGetValue(owner, out var statDict))
+            {
+                statDict = new Dictionary<StatType, Stat>();
+                m_instanceStats[owner] = statDict;
+            }
+
+            if (!statDict.TryGetValue(statType, out var stat))
+            {
+                var entityType = m_instanceEntityTypes[owner];
+                var defStat = GetOrCreateDefinitionStat(entityType, statType);
+                stat = new Stat(defStat.Value);
+                defStat.OnValueChanged += stat.SetBaseValueAndRecalculate;
+                statDict[statType] = stat;
+            }
+
+            return stat;
         }
 
         // --- Definition access (skill tree, no spawn needed) ---
 
-        public Stat GetDefinitionStat(EntityType entityType, StatType statType)
+        public Stat GetDefinitionStat(EntityType entityType, StatType statType, double baseValue = 0)
         {
-            return m_definitionStats[entityType][statType];
+            return GetOrCreateDefinitionStat(entityType, statType, baseValue);
         }
 
-        public float GetDefinitionValue(EntityType entityType, StatType statType)
+        public float GetDefinitionValue(EntityType entityType, StatType statType, double baseValue = 0)
         {
-            return GetDefinitionStat(entityType, statType).Value;
+            return GetDefinitionStat(entityType, statType, baseValue).Value;
         }
+
 
         public void AddDefinitionModifier(EntityType entityType, StatModifier mod)
         {
-            GetDefinitionStat(entityType, mod.statType).AddModifier(mod);
+            // this.Log($"Adding definition modifier for entity type '{entityType}' and stat type '{mod.statType}' with value {mod.value}");
+            foreach (var flag in entityType.GetFlags())
+            {
+                GetDefinitionStat(flag, mod.statType).AddModifier(mod);
+            }
         }
-
         public void RemoveDefinitionModifier(EntityType entityType, StatModifier mod)
         {
-            GetDefinitionStat(entityType, mod.statType).RemoveModifier(mod);
+            foreach (var flag in entityType.GetFlags())
+            {
+                GetDefinitionStat(flag, mod.statType).RemoveModifier(mod);
+            }
         }
 
         // --- Instance access (spawned units) ---
@@ -78,7 +123,7 @@ namespace Stats
                 }
             }
 
-            m_instanceStats[owner]       = stats;
+            m_instanceStats[owner] = stats;
             m_instanceEntityTypes[owner] = entityType;
         }
 
@@ -102,7 +147,7 @@ namespace Stats
 
         public Stat GetInstanceStat(GameObject owner, StatType statType)
         {
-            return m_instanceStats[owner][statType];
+            return GetOrCreateInstanceStat(owner, statType);
         }
 
         public float GetInstanceValue(GameObject owner, StatType statType)

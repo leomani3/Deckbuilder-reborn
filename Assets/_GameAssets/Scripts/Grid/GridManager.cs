@@ -1,90 +1,97 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Deckbuilder.Grid
 {
-    public class GridManager : MonoBehaviour
+    public class GridManager : MyBox.Singleton<GridManager>
     {
-        public static GridManager Instance { get; private set; }
+        [FormerlySerializedAs("cellSize")] [SerializeField] private float m_cellSize = 1f;
+        [FormerlySerializedAs("cellsByCoordinate")] [SerializeField, ReadOnly] private SerializableDictionary<Vector2Int, GridCell> m_cellsByCoordinate = new();
+        [FormerlySerializedAs("cells")] [SerializeField, ReadOnly] private List<GridCell> m_cells = new();
 
-        [SerializeField] private float cellSize = 1f;
-        [SerializeField, ReadOnly] private SerializableDictionary<Vector2Int, GridCell> cellsByCoordinate = new();
+        public IReadOnlyList<GridCell> Cells => m_cells;
 
-        private void Awake()
+        public void Init()
         {
-            Instance = this;
-            BuildGrid();
+            BuildGrid(); 
         }
 
-        public static Vector2Int PositionToCoordinate(Vector3 position)
+        public static Vector2Int PositionToCoordinate(Vector3 _position)
         {
-            float size = Instance != null ? Instance.cellSize : 1f;
+            float _size = Instance != null ? Instance.m_cellSize : 1f;
             return new Vector2Int(
-                Mathf.RoundToInt(position.x / size),
-                Mathf.RoundToInt(position.z / size));
+                Mathf.RoundToInt(_position.x / _size),
+                Mathf.RoundToInt(_position.z / _size));
         }
 
         private void BuildGrid()
         {
-            cellsByCoordinate.Clear();
+            m_cellsByCoordinate.Clear();
+            m_cells.Clear();
+            m_cells.AddRange(FindObjectsByType<GridCell>(FindObjectsSortMode.None));
 
-            var cells = FindObjectsByType<GridCell>(FindObjectsSortMode.None);
-            foreach (var cell in cells)
+            foreach (GridCell _cell in m_cells)
             {
-                if (!cellsByCoordinate.TryAdd(cell.Coordinate, cell))
-                    Debug.LogError($"Duplicate grid coordinate {cell.Coordinate} found on {cell.name}.", cell);
+                if (!m_cellsByCoordinate.TryAdd(_cell.Coordinate, _cell))
+                    Debug.LogError($"Duplicate grid coordinate {_cell.Coordinate} found on {_cell.name}.", _cell);
             }
 
-            foreach (var cell in cells)
+            foreach (GridCell _cell in m_cells)
             {
-                cell.ClearNeighbors();
-                foreach (var direction in GridDirectionUtility.All)
+                _cell.ClearNeighbors();
+                foreach (GridDirection _direction in GridDirectionUtility.All)
                 {
-                    var neighborCoordinate = cell.Coordinate + GridDirectionUtility.GetOffset(direction);
-                    if (cellsByCoordinate.TryGetValue(neighborCoordinate, out var neighbor))
-                        cell.SetNeighbor(direction, neighbor);
+                    Vector2Int _neighborCoordinate = _cell.Coordinate + GridDirectionUtility.GetOffset(_direction);
+                    if (m_cellsByCoordinate.TryGetValue(_neighborCoordinate, out GridCell _neighbor))
+                        _cell.SetNeighbor(_direction, _neighbor);
                 }
             }
         }
 
-        public GridCell GetCell(Vector2Int coordinate)
+        public GridCell GetCell(Vector2Int _coordinate)
         {
-            return cellsByCoordinate.TryGetValue(coordinate, out var cell) ? cell : null;
+            return m_cellsByCoordinate.TryGetValue(_coordinate, out GridCell _cell) ? _cell : null;
         }
 
-        public IEnumerable<GridCell> GetCellsInZone(Vector2Int origin, GridShape shape, int size)
+        public GridCell GetCell(float _x, float _y)
         {
-            foreach (var coordinate in GridShapeUtility.GetCoordinates(origin, shape, size))
+            return GetCell(new Vector2Int(Mathf.RoundToInt(_x), Mathf.RoundToInt(_y)));
+        }
+
+        public IEnumerable<GridCell> GetCellsInZone(Vector2Int _origin, GridShape _shape, int _size)
+        {
+            foreach (Vector2Int _coordinate in GridShapeUtility.GetCoordinates(_origin, _shape, _size))
             {
-                if (cellsByCoordinate.TryGetValue(coordinate, out var cell))
-                    yield return cell;
+                if (m_cellsByCoordinate.TryGetValue(_coordinate, out GridCell _cell))
+                    yield return _cell;
             }
         }
 
-        public int GetManhattanDistance(GridCell a, GridCell b)
+        public int GetManhattanDistance(GridCell _a, GridCell _b)
         {
-            return GridShapeUtility.ManhattanDistance(a.Coordinate, b.Coordinate);
+            return GridShapeUtility.ManhattanDistance(_a.Coordinate, _b.Coordinate);
         }
 
-        public List<GridCell> FindPath(GridCell start, GridCell goal, bool ignoreOccupants = false, bool randomize = false)
+        public List<GridCell> FindPath(GridCell _start, GridCell _goal, bool _ignoreOccupants = false, bool _randomize = false)
         {
-            return GridPathfinder.FindPath(start, goal, GetCell, ignoreOccupants, randomize);
+            return GridPathfinder.FindPath(_start, _goal, GetCell, _ignoreOccupants, _randomize);
         }
 
-        public bool HasLineOfSight(GridCell from, GridCell to, out GridCell blockingCell)
+        public bool HasLineOfSight(GridCell _from, GridCell _to, out GridCell _blockingCell)
         {
-            return GridLineOfSight.HasLineOfSight(from, to, GetCell, out blockingCell);
+            return GridLineOfSight.HasLineOfSight(_from, _to, GetCell, out _blockingCell);
         }
 
-        public bool MoveEntity(GridEntity entity, GridCell targetCell)
+        public bool MoveEntity(Entity _entity, GridCell _targetCell)
         {
-            if (targetCell == null || targetCell.IsOccupied)
+            if (_targetCell == null || _targetCell.IsOccupied)
                 return false;
 
-            entity.CurrentCell?.ClearOccupant();
-            return targetCell.TrySetOccupant(entity);
+            _entity.CurrentCell?.ClearOccupant();
+            return _targetCell.TrySetOccupant(_entity);
         }
     }
 }

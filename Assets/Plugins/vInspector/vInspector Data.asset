@@ -31,3 +31,24 @@ MonoBehaviour:
     isSceneGameObject: 0
     isAsset: 1
     _typeString: GameAssets, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - _obj: {fileID: 102900000, guid: 02265c4cf95e33c45ab3ccc830fa6934, type: 3}
+    globalId:
+      globalObjectIdString: GlobalObjectId_V1-1-02265c4cf95e33c45ab3ccc830fa6934-102900000-0
+    isSceneGameObject: 0
+    isAsset: 1
+    _typeString: UnityEditor.SceneAsset, UnityEditor.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - _obj: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+    globalId:
+      globalObjectIdString: GlobalObjectId_V1-1-99c9720ab356a0642a771bea13969a05-102900000-0
+    isSceneGameObject: 0
+    isAsset: 1
+    _typeString: UnityEditor.SceneAsset, UnityEditor.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - _obj: {fileID: 6320843068774437304, guid: 44d918900ab201d429fba1a314c497a3, type: 3}
+    globalId:
+      globalObjectIdString: GlobalObjectId_V1-1-44d918900ab201d429fba1a314c497a3-6320843068774437304-0
+    isSceneGameObject: 0
+    isAsset: 1
+    _typeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

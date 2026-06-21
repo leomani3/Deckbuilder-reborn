@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: isObstacle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
+      propertyPath: m_isObstacle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -805,6 +809,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
       propertyPath: isObstacle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
+      propertyPath: m_isObstacle
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1623,17 +1631,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 489327175}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &493302793 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
-  m_PrefabInstance: {fileID: 134553721}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64666fd55a873da46be4f3db3e5070f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.GridCell
 --- !u!1001 &507462834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2126,6 +2123,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
       propertyPath: isObstacle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
+      propertyPath: m_isObstacle
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2758,121 +2759,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 660988020}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &667663746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 667663747}
-  - component: {fileID: 667663750}
-  - component: {fileID: 667663749}
-  - component: {fileID: 667663748}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &667663747
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667663746}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 868677033}
-  m_Father: {fileID: 2115695602}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &667663748
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667663746}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &667663749
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667663746}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &667663750
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667663746}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &671351677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2931,6 +2817,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
       propertyPath: isObstacle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
+      propertyPath: m_isObstacle
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3876,129 +3766,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 847518399}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &868677032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 868677033}
-  - component: {fileID: 868677036}
-  - component: {fileID: 868677035}
-  - component: {fileID: 868677034}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &868677033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868677032}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.004, y: 0.437, z: 0.468}
-  m_LocalScale: {x: 0.43, y: 0.1, z: 0.61}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 667663747}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &868677034
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868677032}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &868677035
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868677032}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b34b07a45ba63ce47896c9e674f3a7a7, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &868677036
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868677032}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &880967140 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
-  m_PrefabInstance: {fileID: 709284087}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64666fd55a873da46be4f3db3e5070f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.GridCell
 --- !u!1001 &884105325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4553,6 +4320,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
       propertyPath: isObstacle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
+      propertyPath: m_isObstacle
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6730,17 +6501,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 1448742144}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1452154519 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
-  m_PrefabInstance: {fileID: 1320155506}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64666fd55a873da46be4f3db3e5070f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.GridCell
 --- !u!1001 &1459706800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7297,6 +7057,10 @@ PrefabInstance:
       propertyPath: isObstacle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
+      propertyPath: m_isObstacle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7431,6 +7195,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 1542995482}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1547763361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1547763363}
+  - component: {fileID: 1547763362}
+  m_Layer: 0
+  m_Name: CombatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1547763362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547763361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6851a9bc94b6097449343dbebda3bae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatManager
+  m_playerPrefab: {fileID: 7084411772291711107, guid: 44d918900ab201d429fba1a314c497a3, type: 3}
+--- !u!4 &1547763363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547763361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2027796468}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1553573491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8733,17 +8543,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 1915302631}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1916998432 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
-  m_PrefabInstance: {fileID: 1096321671}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64666fd55a873da46be4f3db3e5070f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.GridCell
 --- !u!1 &1917021794
 GameObject:
   m_ObjectHideFlags: 0
@@ -9257,10 +9056,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9842545e1227ede46b649e2110f45320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.GridManager
-  cellSize: 1
-  cellsByCoordinate:
+  m_cellSize: 1
+  m_cellsByCoordinate:
     keys: []
     values: []
+  m_cells: []
 --- !u!4 &2027796468
 Transform:
   m_ObjectHideFlags: 0
@@ -9269,13 +9069,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027796466}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1917021795}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1547763363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2027796469
 MonoBehaviour:
@@ -9289,30 +9089,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2de907eec8e8243bf602864391a543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.Debugging.GridDebugger
-  origin: {fileID: 4633641765334183422}
-  shape: 2
-  size: 0
-  showZone: 0
-  zoneColor: {r: 1, g: 0.5, b: 0, a: 0.6}
-  originColor: {r: 1, g: 0, b: 0, a: 1}
-  showNeighborLinks: 0
-  neighborReference: {fileID: 880967140}
-  neighborLinkColor: {r: 0, g: 1, b: 1, a: 1}
-  showPath: 0
-  pathStart: {fileID: 493302793}
-  pathEnd: {fileID: 1916998432}
-  pathIgnoreOccupants: 0
-  pathColor: {r: 0, g: 1, b: 0, a: 1}
-  noPathColor: {r: 1, g: 0, b: 0, a: 1}
-  showLineOfSight: 0
-  losFrom: {fileID: 493302793}
-  losTo: {fileID: 1452154519}
-  losClearColor: {r: 0, g: 1, b: 0, a: 1}
-  losBlockedColor: {r: 1, g: 0, b: 0, a: 1}
-  losBlockingCellColor: {r: 1, g: 0, b: 0, a: 0.9}
-  showCoordinateLabels: 0
-  markerHeight: 0.05
-  markerRadius: 0.4
+  m_origin: {fileID: 0}
+  m_shape: 2
+  m_size: 2
+  m_showZone: 1
+  m_zoneColor: {r: 1, g: 0.5, b: 0, a: 0.6}
+  m_originColor: {r: 1, g: 0, b: 0, a: 1}
+  m_showNeighborLinks: 0
+  m_neighborReference: {fileID: 0}
+  m_neighborLinkColor: {r: 0, g: 1, b: 1, a: 1}
+  m_showPath: 0
+  m_pathStart: {fileID: 0}
+  m_pathEnd: {fileID: 0}
+  m_pathIgnoreOccupants: 0
+  m_pathColor: {r: 0, g: 1, b: 0, a: 1}
+  m_noPathColor: {r: 1, g: 0, b: 0, a: 1}
+  m_showLineOfSight: 0
+  m_losFrom: {fileID: 0}
+  m_losTo: {fileID: 0}
+  m_losClearColor: {r: 0, g: 1, b: 0, a: 1}
+  m_losBlockedColor: {r: 1, g: 0, b: 0, a: 1}
+  m_losBlockingCellColor: {r: 1, g: 0, b: 0, a: 0.9}
+  m_showCoordinateLabels: 0
+  m_markerHeight: 0.05
+  m_markerRadius: 0.4
 --- !u!1001 &2033431454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9499,76 +9299,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 2078681406}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2115695601
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2115695602}
-  - component: {fileID: 2115695603}
-  - component: {fileID: 2115695604}
-  m_Layer: 0
-  m_Name: Entity
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2115695602
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115695601}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 667663747}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2115695603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115695601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a026cd1ee27b443aaccb42687d725d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.GridEntity
-  startingCell: {fileID: 4633641765334183422}
-  moveSpeed: 5
-  rotationSpeed: 25
---- !u!114 &2115695604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115695601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194d756f8007ecf459321936d833e46d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.Debugging.GridEntityMoveDebugger
-  entity: {fileID: 2115695603}
-  enableClickToMove: 1
-  cellLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  currentCellColor: {r: 0, g: 1, b: 0, a: 1}
-  destinationCellColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  markerHeight: 0.05
-  markerRadius: 0.4
 --- !u!1001 &2133341998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9755,22 +9485,10 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157746487140418352, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
   m_PrefabInstance: {fileID: 4633641765334183420}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4633641765334183422 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7297403670529949913, guid: a83f9298c213f1b40ae765727877c4e4, type: 3}
-  m_PrefabInstance: {fileID: 4633641765334183420}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64666fd55a873da46be4f3db3e5070f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deckbuilder.Grid.GridCell
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1392128783}
-  - {fileID: 2027796468}
   - {fileID: 809047057}
-  - {fileID: 2115695602}
+  - {fileID: 1547763363}

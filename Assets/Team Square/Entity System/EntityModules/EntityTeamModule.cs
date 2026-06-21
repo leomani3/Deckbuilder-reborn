@@ -1,0 +1,17 @@
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+public enum Team
+{
+    Player = 0,
+    Enemy = 1
+}
+
+public class EntityTeamModule : EntityModule
+{
+    [SerializeField]
+    [EnumToggleButtons]
+    private Team team;
+
+    public Team Team => team;
+}

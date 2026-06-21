@@ -1,4 +1,6 @@
 using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Stats
 {
@@ -6,7 +8,7 @@ namespace Stats
     public enum ModifierType
     {
         Flat,
-        AdditivePercentage,
+        Percentage,
         Multiplier
     }
     

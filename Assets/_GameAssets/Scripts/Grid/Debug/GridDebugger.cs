@@ -6,181 +6,181 @@ namespace Deckbuilder.Grid.Debugging
     public class GridDebugger : MonoBehaviour
     {
         [Header("Zone")]
-        [SerializeField] private GridCell origin;
-        [SerializeField] private GridShape shape = GridShape.Diamond;
-        [SerializeField] private int size = 2;
-        [SerializeField] private bool showZone = true;
-        [SerializeField] private Color zoneColor = new(1f, 0.5f, 0f, 0.6f);
-        [SerializeField] private Color originColor = Color.red;
+        [SerializeField] private GridCell m_origin;
+        [SerializeField] private GridShape m_shape = GridShape.Diamond;
+        [SerializeField] private int m_size = 2;
+        [SerializeField] private bool m_showZone = true;
+        [SerializeField] private Color m_zoneColor = new(1f, 0.5f, 0f, 0.6f);
+        [SerializeField] private Color m_originColor = Color.red;
 
         [Header("Neighbors")]
-        [SerializeField] private bool showNeighborLinks;
-        [SerializeField] private GridCell neighborReference;
-        [SerializeField] private Color neighborLinkColor = Color.cyan;
+        [SerializeField] private bool m_showNeighborLinks;
+        [SerializeField] private GridCell m_neighborReference;
+        [SerializeField] private Color m_neighborLinkColor = Color.cyan;
 
         [Header("Pathfinding")]
-        [SerializeField] private bool showPath;
-        [SerializeField] private GridCell pathStart;
-        [SerializeField] private GridCell pathEnd;
-        [SerializeField] private bool pathIgnoreOccupants;
-        [SerializeField] private Color pathColor = Color.green;
-        [SerializeField] private Color noPathColor = Color.red;
+        [SerializeField] private bool m_showPath;
+        [SerializeField] private GridCell m_pathStart;
+        [SerializeField] private GridCell m_pathEnd;
+        [SerializeField] private bool m_pathIgnoreOccupants;
+        [SerializeField] private Color m_pathColor = Color.green;
+        [SerializeField] private Color m_noPathColor = Color.red;
 
         [Header("Line Of Sight")]
-        [SerializeField] private bool showLineOfSight;
-        [SerializeField] private GridCell losFrom;
-        [SerializeField] private GridCell losTo;
-        [SerializeField] private Color losClearColor = Color.green;
-        [SerializeField] private Color losBlockedColor = Color.red;
-        [SerializeField] private Color losBlockingCellColor = new(1f, 0f, 0f, 0.9f);
+        [SerializeField] private bool m_showLineOfSight;
+        [SerializeField] private GridCell m_losFrom;
+        [SerializeField] private GridCell m_losTo;
+        [SerializeField] private Color m_losClearColor = Color.green;
+        [SerializeField] private Color m_losBlockedColor = Color.red;
+        [SerializeField] private Color m_losBlockingCellColor = new(1f, 0f, 0f, 0.9f);
 
         [Header("Labels")]
-        [SerializeField] private bool showCoordinateLabels;
+        [SerializeField] private bool m_showCoordinateLabels;
 
         [Header("Gizmo Sizing")]
-        [SerializeField] private float markerHeight = 0.05f;
-        [SerializeField] private float markerRadius = 0.4f;
+        [SerializeField] private float m_markerHeight = 0.05f;
+        [SerializeField] private float m_markerRadius = 0.4f;
 
         private void OnDrawGizmos()
         {
-            if (showZone)
+            if (m_showZone)
                 DrawZone();
 
-            if (showNeighborLinks)
+            if (m_showNeighborLinks)
                 DrawNeighborLinks();
 
-            if (showPath)
+            if (m_showPath)
                 DrawPath();
 
-            if (showLineOfSight)
+            if (m_showLineOfSight)
                 DrawLineOfSight();
 
-            if (showCoordinateLabels)
+            if (m_showCoordinateLabels)
                 DrawCoordinateLabels();
         }
 
         private void DrawZone()
         {
-            if (origin == null)
+            if (m_origin == null)
                 return;
 
-            var cellsByCoordinate = BuildCoordinateLookup();
-            var originCoordinate = origin.Coordinate;
+            Dictionary<Vector2Int, GridCell> _cellsByCoordinate = BuildCoordinateLookup();
+            Vector2Int _originCoordinate = m_origin.Coordinate;
 
-            Gizmos.color = zoneColor;
-            foreach (var coordinate in GridShapeUtility.GetCoordinates(originCoordinate, shape, size))
+            Gizmos.color = m_zoneColor;
+            foreach (Vector2Int _coordinate in GridShapeUtility.GetCoordinates(_originCoordinate, m_shape, m_size))
             {
-                if (coordinate == originCoordinate)
+                if (_coordinate == _originCoordinate)
                     continue;
 
-                if (cellsByCoordinate.TryGetValue(coordinate, out var cell))
-                    DrawMarker(cell.transform.position);
+                if (_cellsByCoordinate.TryGetValue(_coordinate, out GridCell _cell))
+                    DrawMarker(_cell.transform.position);
             }
 
-            Gizmos.color = originColor;
-            DrawMarker(origin.transform.position);
+            Gizmos.color = m_originColor;
+            DrawMarker(m_origin.transform.position);
         }
 
         private void DrawNeighborLinks()
         {
-            var cell = neighborReference != null ? neighborReference : origin;
-            if (cell == null)
+            GridCell _cell = m_neighborReference != null ? m_neighborReference : m_origin;
+            if (_cell == null)
                 return;
 
-            var cellsByCoordinate = BuildCoordinateLookup();
-            var coordinate = cell.Coordinate;
+            Dictionary<Vector2Int, GridCell> _cellsByCoordinate = BuildCoordinateLookup();
+            Vector2Int _coordinate = _cell.Coordinate;
 
-            Gizmos.color = neighborLinkColor;
-            var from = cell.transform.position + Vector3.up * markerHeight;
-            foreach (var direction in GridDirectionUtility.All)
+            Gizmos.color = m_neighborLinkColor;
+            Vector3 _from = _cell.transform.position + Vector3.up * m_markerHeight;
+            foreach (GridDirection _direction in GridDirectionUtility.All)
             {
-                var neighborCoordinate = coordinate + GridDirectionUtility.GetOffset(direction);
-                if (!cellsByCoordinate.TryGetValue(neighborCoordinate, out var neighbor))
+                Vector2Int _neighborCoordinate = _coordinate + GridDirectionUtility.GetOffset(_direction);
+                if (!_cellsByCoordinate.TryGetValue(_neighborCoordinate, out GridCell _neighbor))
                     continue;
 
-                var to = neighbor.transform.position + Vector3.up * markerHeight;
-                Gizmos.DrawLine(from, to);
-                Gizmos.DrawSphere(to, markerRadius * 0.5f);
+                Vector3 _to = _neighbor.transform.position + Vector3.up * m_markerHeight;
+                Gizmos.DrawLine(_from, _to);
+                Gizmos.DrawSphere(_to, m_markerRadius * 0.5f);
             }
         }
 
         private void DrawPath()
         {
-            if (pathStart == null || pathEnd == null)
+            if (m_pathStart == null || m_pathEnd == null)
                 return;
 
-            var cellsByCoordinate = BuildCoordinateLookup();
-            var path = GridPathfinder.FindPath(pathStart, pathEnd, coordinate => cellsByCoordinate.GetValueOrDefault(coordinate), pathIgnoreOccupants);
+            Dictionary<Vector2Int, GridCell> _cellsByCoordinate = BuildCoordinateLookup();
+            List<GridCell> _path = GridPathfinder.FindPath(m_pathStart, m_pathEnd, _coordinate => _cellsByCoordinate.GetValueOrDefault(_coordinate), m_pathIgnoreOccupants);
 
-            if (path == null)
+            if (_path == null)
             {
-                Gizmos.color = noPathColor;
+                Gizmos.color = m_noPathColor;
                 Gizmos.DrawLine(
-                    pathStart.transform.position + Vector3.up * markerHeight,
-                    pathEnd.transform.position + Vector3.up * markerHeight);
+                    m_pathStart.transform.position + Vector3.up * m_markerHeight,
+                    m_pathEnd.transform.position + Vector3.up * m_markerHeight);
                 return;
             }
 
-            Gizmos.color = pathColor;
-            for (int i = 0; i < path.Count; i++)
+            Gizmos.color = m_pathColor;
+            for (int _i = 0; _i < _path.Count; _i++)
             {
-                var position = path[i].transform.position + Vector3.up * markerHeight;
-                Gizmos.DrawSphere(position, markerRadius * 0.6f);
+                Vector3 _position = _path[_i].transform.position + Vector3.up * m_markerHeight;
+                Gizmos.DrawSphere(_position, m_markerRadius * 0.6f);
 
-                if (i > 0)
+                if (_i > 0)
                 {
-                    var previousPosition = path[i - 1].transform.position + Vector3.up * markerHeight;
-                    Gizmos.DrawLine(previousPosition, position);
+                    Vector3 _previousPosition = _path[_i - 1].transform.position + Vector3.up * m_markerHeight;
+                    Gizmos.DrawLine(_previousPosition, _position);
                 }
             }
         }
 
         private void DrawLineOfSight()
         {
-            if (losFrom == null || losTo == null)
+            if (m_losFrom == null || m_losTo == null)
                 return;
 
-            var cellsByCoordinate = BuildCoordinateLookup();
-            var hasLineOfSight = GridLineOfSight.HasLineOfSight(losFrom, losTo, coordinate => cellsByCoordinate.GetValueOrDefault(coordinate), out var blockingCell);
+            Dictionary<Vector2Int, GridCell> _cellsByCoordinate = BuildCoordinateLookup();
+            bool _hasLineOfSight = GridLineOfSight.HasLineOfSight(m_losFrom, m_losTo, _coordinate => _cellsByCoordinate.GetValueOrDefault(_coordinate), out GridCell _blockingCell);
 
-            var from = losFrom.transform.position + Vector3.up * markerHeight;
-            var to = losTo.transform.position + Vector3.up * markerHeight;
+            Vector3 _from = m_losFrom.transform.position + Vector3.up * m_markerHeight;
+            Vector3 _to = m_losTo.transform.position + Vector3.up * m_markerHeight;
 
-            Gizmos.color = hasLineOfSight ? losClearColor : losBlockedColor;
-            Gizmos.DrawLine(from, to);
+            Gizmos.color = _hasLineOfSight ? m_losClearColor : m_losBlockedColor;
+            Gizmos.DrawLine(_from, _to);
 
-            if (blockingCell != null)
+            if (_blockingCell != null)
             {
-                Gizmos.color = losBlockingCellColor;
-                Gizmos.DrawCube(blockingCell.transform.position + Vector3.up * markerHeight, Vector3.one * markerRadius);
+                Gizmos.color = m_losBlockingCellColor;
+                Gizmos.DrawCube(_blockingCell.transform.position + Vector3.up * m_markerHeight, Vector3.one * m_markerRadius);
             }
         }
 
         private void DrawCoordinateLabels()
         {
 #if UNITY_EDITOR
-            var cells = FindObjectsByType<GridCell>(FindObjectsSortMode.None);
-            foreach (var cell in cells)
+            GridCell[] _cells = FindObjectsByType<GridCell>(FindObjectsSortMode.None);
+            foreach (GridCell _cell in _cells)
             {
-                var position = cell.transform.position + Vector3.up * (markerHeight + 0.1f);
-                UnityEditor.Handles.Label(position, cell.Coordinate.ToString());
+                Vector3 _position = _cell.transform.position + Vector3.up * (m_markerHeight + 0.1f);
+                UnityEditor.Handles.Label(_position, _cell.Coordinate.ToString());
             }
 #endif
         }
 
-        private void DrawMarker(Vector3 position)
+        private void DrawMarker(Vector3 _position)
         {
-            Gizmos.DrawSphere(position + Vector3.up * markerHeight, markerRadius);
+            Gizmos.DrawSphere(_position + Vector3.up * m_markerHeight, m_markerRadius);
         }
 
         private static Dictionary<Vector2Int, GridCell> BuildCoordinateLookup()
         {
-            var lookup = new Dictionary<Vector2Int, GridCell>();
-            var cells = FindObjectsByType<GridCell>(FindObjectsSortMode.None);
-            foreach (var cell in cells)
-                lookup[cell.Coordinate] = cell;
+            Dictionary<Vector2Int, GridCell> _lookup = new Dictionary<Vector2Int, GridCell>();
+            GridCell[] _cells = FindObjectsByType<GridCell>(FindObjectsSortMode.None);
+            foreach (GridCell _cell in _cells)
+                _lookup[_cell.Coordinate] = _cell;
 
-            return lookup;
+            return _lookup;
         }
     }
 }

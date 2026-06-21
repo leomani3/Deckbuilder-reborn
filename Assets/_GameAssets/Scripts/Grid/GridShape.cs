@@ -13,66 +13,66 @@ namespace Deckbuilder.Grid
 
     public static class GridShapeUtility
     {
-        public static IEnumerable<Vector2Int> GetCoordinates(Vector2Int origin, GridShape shape, int size)
+        public static IEnumerable<Vector2Int> GetCoordinates(Vector2Int _origin, GridShape _shape, int _size)
         {
-            foreach (var offset in GetOffsets(shape, size))
-                yield return origin + offset;
+            foreach (Vector2Int _offset in GetOffsets(_shape, _size))
+                yield return _origin + _offset;
         }
 
-        public static IEnumerable<Vector2Int> GetOffsets(GridShape shape, int size)
+        public static IEnumerable<Vector2Int> GetOffsets(GridShape _shape, int _size)
         {
-            switch (shape)
+            switch (_shape)
             {
                 case GridShape.Single:
                     yield return Vector2Int.zero;
                     break;
 
                 case GridShape.Cross:
-                    foreach (var offset in GetCross(size))
-                        yield return offset;
+                    foreach (Vector2Int _offset in GetCross(_size))
+                        yield return _offset;
                     break;
 
                 case GridShape.Diamond:
-                    foreach (var offset in GetDiamond(size))
-                        yield return offset;
+                    foreach (Vector2Int _offset in GetDiamond(_size))
+                        yield return _offset;
                     break;
 
                 case GridShape.Square:
-                    foreach (var offset in GetSquare(size))
-                        yield return offset;
+                    foreach (Vector2Int _offset in GetSquare(_size))
+                        yield return _offset;
                     break;
             }
         }
 
-        public static int ManhattanDistance(Vector2Int a, Vector2Int b)
+        public static int ManhattanDistance(Vector2Int _a, Vector2Int _b)
         {
-            return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+            return Mathf.Abs(_a.x - _b.x) + Mathf.Abs(_a.y - _b.y);
         }
 
-        private static IEnumerable<Vector2Int> GetCross(int size)
+        private static IEnumerable<Vector2Int> GetCross(int _size)
         {
-            for (int offset = -size; offset <= size; offset++)
+            for (int _offset = -_size; _offset <= _size; _offset++)
             {
-                yield return new Vector2Int(offset, 0);
-                yield return new Vector2Int(0, offset);
+                yield return new Vector2Int(_offset, 0);
+                yield return new Vector2Int(0, _offset);
             }
         }
 
-        private static IEnumerable<Vector2Int> GetDiamond(int size)
+        private static IEnumerable<Vector2Int> GetDiamond(int _size)
         {
-            for (int x = -size; x <= size; x++)
+            for (int _x = -_size; _x <= _size; _x++)
             {
-                int remaining = size - Mathf.Abs(x);
-                for (int y = -remaining; y <= remaining; y++)
-                    yield return new Vector2Int(x, y);
+                int _remaining = _size - Mathf.Abs(_x);
+                for (int _y = -_remaining; _y <= _remaining; _y++)
+                    yield return new Vector2Int(_x, _y);
             }
         }
 
-        private static IEnumerable<Vector2Int> GetSquare(int size)
+        private static IEnumerable<Vector2Int> GetSquare(int _size)
         {
-            for (int x = -size; x <= size; x++)
-                for (int y = -size; y <= size; y++)
-                    yield return new Vector2Int(x, y);
+            for (int _x = -_size; _x <= _size; _x++)
+                for (int _y = -_size; _y <= _size; _y++)
+                    yield return new Vector2Int(_x, _y);
         }
     }
 }

@@ -6,22 +6,22 @@ namespace Deckbuilder.Grid
 {
     public static class GridLineOfSight
     {
-        public static bool HasLineOfSight(GridCell from, GridCell to, Func<Vector2Int, GridCell> cellResolver, out GridCell blockingCell)
+        public static bool HasLineOfSight(GridCell _from, GridCell _to, Func<Vector2Int, GridCell> _cellResolver, out GridCell _blockingCell)
         {
-            blockingCell = null;
+            _blockingCell = null;
 
-            if (from == null || to == null)
+            if (_from == null || _to == null)
                 return false;
 
-            foreach (var coordinate in GetLineCoordinates(from.Coordinate, to.Coordinate))
+            foreach (Vector2Int _coordinate in GetLineCoordinates(_from.Coordinate, _to.Coordinate))
             {
-                if (coordinate == from.Coordinate || coordinate == to.Coordinate)
+                if (_coordinate == _from.Coordinate || _coordinate == _to.Coordinate)
                     continue;
 
-                var cell = cellResolver(coordinate);
-                if (cell != null && (cell.IsObstacle || cell.IsOccupied))
+                GridCell _cell = _cellResolver(_coordinate);
+                if (_cell != null && (_cell.IsObstacle || _cell.IsOccupied))
                 {
-                    blockingCell = cell;
+                    _blockingCell = _cell;
                     return false;
                 }
             }
@@ -29,37 +29,37 @@ namespace Deckbuilder.Grid
             return true;
         }
 
-        public static IEnumerable<Vector2Int> GetLineCoordinates(Vector2Int from, Vector2Int to)
+        public static IEnumerable<Vector2Int> GetLineCoordinates(Vector2Int _from, Vector2Int _to)
         {
-            int x0 = from.x, y0 = from.y;
-            int x1 = to.x, y1 = to.y;
+            int _x0 = _from.x, _y0 = _from.y;
+            int _x1 = _to.x, _y1 = _to.y;
 
-            int dx = Mathf.Abs(x1 - x0);
-            int dy = Mathf.Abs(y1 - y0);
-            int signX = x1 > x0 ? 1 : -1;
-            int signY = y1 > y0 ? 1 : -1;
+            int _dx = Mathf.Abs(_x1 - _x0);
+            int _dy = Mathf.Abs(_y1 - _y0);
+            int _signX = _x1 > _x0 ? 1 : -1;
+            int _signY = _y1 > _y0 ? 1 : -1;
 
-            int x = x0, y = y0;
-            int error = dx - dy;
+            int _x = _x0, _y = _y0;
+            int _error = _dx - _dy;
 
             while (true)
             {
-                yield return new Vector2Int(x, y);
+                yield return new Vector2Int(_x, _y);
 
-                if (x == x1 && y == y1)
+                if (_x == _x1 && _y == _y1)
                     break;
 
-                int doubledError = error * 2;
-                if (doubledError > -dy)
+                int _doubledError = _error * 2;
+                if (_doubledError > -_dy)
                 {
-                    error -= dy;
-                    x += signX;
+                    _error -= _dy;
+                    _x += _signX;
                 }
 
-                if (doubledError < dx)
+                if (_doubledError < _dx)
                 {
-                    error += dx;
-                    y += signY;
+                    _error += _dx;
+                    _y += _signY;
                 }
             }
         }
